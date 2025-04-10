@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-210416137-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-210416137-2');
+</script>
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=0.9,minimum-scale=0.9, maximum-scale=0.9, user-scalable=no"/>
+    <title>공정선거위원회 제20대 대통령선거 모의투표</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        @font-face {
+    font-family: 'MaruBuri-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+        .center {
+            text-align: center;
+        }
+
+        .star-list {
+            width: 400px;
+            margin: auto;
+
+        }
+
+        .star-name {
+            display: inline-block;
+        }
+
+        .star-name:hover {
+            text-decoration: underline;
+        }
+
+        .card {
+            margin-bottom: 15px;
+        }
+        .wrap {
+            position: center;
+            margin: auto;
+            width: 410px;
+            background-position: center;
+        }
+
+        .mytitle {
+
+
+            height: 150px;
+            background-image: url('https://blog.kakaocdn.net/dn/bLeFJu/btruoKITsjc/jsRPW2sWsvwBqZWCr2xXPk/img.png');
+            background-position: center;
+            background-size: cover;
+
+            border-radius: 10px;
+            text-align: center;
+            padding-top: 40px;
+
+        }
+        .undertitle {
+            font-family: 'MaruBuri-Regular';
+              }
+
+
+    </style>
+<script>
+
+$(document).ready(function () {
+            showStar();
+        });
+   function showStar() {
+            $.ajax({
+                type: 'GET',
+                url: '/api/listup?sample_give=샘플데이터',
+                data: {},
+                success: function (response) {
+                    let all_star = response['all_stars']
+                    for (let i = 0; i < all_star.length; i++) {
+                        let name = all_star[i]['name']
+                        let img_url = all_star[i]['img_url']
+                        let slogan = all_star[i]['slogan']
+                        let url = all_star[i]['url']
+                        let like = all_star[i]['like']
+
+                        console.log(all_star)
+                        let temp_html2 = `<div class="card">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <img
+                                        src="${img_url}"
+                                        alt="Placeholder image"
+                                />
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <a href="${url}" target="_blank" class="star-name title is-4">${name} (좋아요: ${like})</a>
+                            <p class="subtitle is-6">${slogan}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>`
+                        $('#star-box').append(temp_html2)
+                    }
+                }
+            });
+        }
+
+
+</script>
+
+</head>
+
+
+<body>
+<section class="wrap">
+
+  <div class="container center">
+  <div class="mytitle"></div>
+        <h1 class="title undertitle">
+
+            2022년 제20대 대선 <p>블록체인 투표
+        </h1>
+        <br>
+        <h2 class="subtitle undertitle">
+            사전투표 부정선거를 검거할 확실한 방법!
+            <br>한 표를 행사해주시는 여러분이
+            <br>이나라의 공정선거위원 입니다!
+        </h2>
+
+    </div>
+
+</section>
+
+<div class="star-list" id="star-box">
+
+</div>
+
+</body>
+</html>
